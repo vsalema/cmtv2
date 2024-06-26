@@ -1,59 +1,58 @@
-<html lang="en" class="">
- <meta charset="UTF-8">
- <title>HLS video hosted on Dropbox</title>
-  <head>
-  <link href="https://vjs.zencdn.net/8.0.4/video-js.css" rel="stylesheet" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- If you'd like to support IE8 (for Video.js versions prior to v7) -->
-  <!-- <script src="https://vjs.zencdn.net/ie8/1.1.2/videojs-ie8.min.js"></script> -->
-
-  <style>
-  body {
-  margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
+<!DOCTYPE html>
+<html lang='en' class=''>
+<head>
+<meta charset='UTF-8'>
+<title>tv</title>
+<meta name="robots" content="noindex">
+	<style>
+	video {
+	width: 100%;
 }
-
-@media screen and (max-width: 1367px) {
-  .container {
-    max-width: 854px;
-    margin: 0 auto;
-  }
-}
-
-@media screen and (min-width: 1367px) {
-  .container {
-    max-width: 1280px;
-    margin: 0 auto;
-  }
-}
-
-@media screen and (min-width: 2559px) {
-  .container {
-    max-width: 1920px;
-    margin: 0 auto;
-  }
-}
-
-.video-js {
-  font-family: Avenir, avenir next, helvetica neue, segoe ui, Helvetica, Arial,
-    sans-serif !important;
-  font-variant-numeric: tabular-nums !important;
-  margin-bottom: 0px;
-  box-shadow: 0px 0px 5px black;
-}
-</style>
-
-
+	</style>
 </head>
-
 <body>
-   
-  
-    <video  id="video-js" class="video-js vjs-16-9" controls preload="auto" width="1280" height="720" autoplay  data-setup="{}">
-      <source src="https://nes101.jobdone.top:8088/live/agrrrr/playlist.m3u8?vidictid=199009826652&id=116560&pk=887171d5e7f591a9ba4d1f3c98b809a3899732a6d1aad802b4041314a36bf732f64a5743e7c6b476ea491be6cb38e331ced7df076ba835e30be0918bccfb7015" type="application/x-mpegURL" />
-    </video>
-  
-  
-  
-  <script src="https://vjs.zencdn.net/8.0.4/video.min.js"></script>
-</body>
+
+
+
+<div class="container">
+	<video autoplay controls crossorigin playsinline poster="https://bitdash-a.akamaihd.net/content/sintel/poster.png"></video>
+</div>
+<!-- Plyr resources and browser polyfills are specified in the pen settings -->
+<!-- Hls.js 0.9.x and 0.10.x both have critical bugs affecting this demo. Using fixed git hash to when it was working (0.10.0 pre-release), until https://github.com/video-dev/hls.js/issues/1790 has been resolved -->
+
+	<script id="rendered-js" type="module">
+	document.addEventListener('DOMContentLoaded', () => {
+	const source = 'https://nes101.jobdone.top:8088/live/agrrrr/playlist.m3u8?vidictid=199008642967&id=116560&pk=06f079f6065496f845c2fee0eb052a12e03398330552ad99d08d31e0c403b7b9f64a5743e7c6b476ea491be6cb38e331ced7df076ba835e30be0918bccfb7015';
+	const video = document.querySelector('video');
+	
+	// For more options see: https://github.com/sampotts/plyr/#options
+	// captions.update is required for captions to work with hls.js
+	const player = new Plyr(video, {captions: {active: true, update: true, language: 'en'}});
+	
+	if (!Hls.isSupported()) {
+		video.src = source;
+	} else {
+		// For more Hls.js options, see https://github.com/dailymotion/hls.js
+		const hls = new Hls();
+		hls.loadSource(source);
+		hls.attachMedia(video);
+		window.hls = hls;
+		
+		// Handle changing captions
+		player.on('languagechange', () => {
+			// Caption support is still flaky. See: https://github.com/sampotts/plyr/issues/994
+			setTimeout(() => hls.subtitleTrack = player.currentTrack, 50);
+		});
+	}
+	
+	// Expose player so it can be used from the console
+	window.player = player;
+});
+		</script>
+	
+	<script src="https://cdn.rawgit.com/video-dev/hls.js/18bb552/dist/hls.min.js"></script>
+	
+	
+	
+	</body>
+	</html> 
