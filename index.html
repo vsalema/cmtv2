@@ -1,67 +1,142 @@
 <!DOCTYPE html>
-<html lang='en' class=''>
-
+<html lang="en">
 <head>
-
-  <meta charset='UTF-8'>
-  <title>CodePen Demo</title>
-
-  <meta name="robots" content="noindex">
-<link rel="stylesheet" href="https://unpkg.com/plyr@3/dist/plyr.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
-
-  <style>
-    
-video {
-	width: 100%;
+<meta http-equiv="refresh" content="5">
+  <meta charset="UTF-8">
+    <title>Embed</title>
+    <script src="//cdn.jsdelivr.net/npm/@clappr/player@0.4.7/dist/clappr.min.js"></script>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/gh/clappr/clappr-level-selector-plugin@latest/dist/level-selector.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/cdnbye@latest/dist/hlsjs-p2p-engine.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/cdnbye@latest/dist/clappr-plugin.min.js"></script>
+    <script type="text/javascript" src="https://popcdn.day/stream/floating.js"></script>
+	<style>
+html, body {
+  height: 100%;
+  width: 100%;
 }
-  </style>
 
-  
+body {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+}
+
+
+.player-container {
+  width: 100%;
+  height: 100%;
+}
+
+video {
+  object-fit: contain;
+}
+
+</style>
 
 </head>
-
 <body>
-  <div class="container">
-	<video autoplay controls crossorigin playsinline></video>
-</div>
-<!-- Plyr resources and browser polyfills are specified in the pen settings -->
-<!-- Hls.js 0.9.x and 0.10.x both have critical bugs affecting this demo. Using fixed git hash to when it was working (0.10.0 pre-release), until https://github.com/video-dev/hls.js/issues/1790 has been resolved -->
-<script src="https://cdn.rawgit.com/video-dev/hls.js/18bb552/dist/hls.min.js"></script>
-  
-<script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=es6,Array.prototype.includes,CustomEvent,Object.entries,Object.values,URL"></script>
-<script src="https://unpkg.com/plyr@3"></script>
-  <script>
-  
-  document.addEventListener('DOMContentLoaded', () => {
-  const source = 'https://nes101.jobdone.top:8088/live/agrrrr/playlist.m3u8?vidictid=199008642967&id=116560&pk=06f079f6065496f845c2fee0eb052a12e03398330552ad99d08d31e0c403b7b9f64a5743e7c6b476ea491be6cb38e331ced7df076ba835e30be0918bccfb7015';
-  const video = document.querySelector('video');
+<div id="player" class="player-container"></div>
+<script>
+ var player = new Clappr.Player(
+        {
+            source: "https://moonlight.wideiptv.top/CMTVPT/tracks-v1/index.fmp4.m3u8?token=dc92f5fd15ec232c56043d695caa234e6c6358e6-bcdbda16f1684add99dc1dee9789ba33-1728909148-1728898348&CMCD=cid%3D%221ceac0a2b2ba%22%2Cmtp%3D500%2Cot%3Dm%2Csf%3Dh%2Csid%3D%22d61a3344-567d-488e-a2bb-1337b49db1fe%22%2Csu&CMCD=cid%3D%221ceac0a2b2ba%22%2Cmtp%3D172200%2Cot%3Dm%2Csf%3Dh%2Csid%3D%22d61a3344-567d-488e-a2bb-1337b49db1fe%22&remote=no_check_ip",
+            parentId: "#player",
+			width: '100%',
+            height: '100%',
+            autoPlay: true,
+            muted: false,
+          plugins: [LevelSelector,CDNByeClapprPlugin],
+            playback: {
+                hlsjsConfig: {
+                    maxBufferSize: 0,       // Highly recommended setting in live mode
+                    maxBufferLength: 10,     // Highly recommended setting in live mode
+                    liveSyncDurationCount: 10,   // Highly recommended setting in live mode
+                    // Other hlsjsConfig options provided by hls.js
+                    p2pConfig: {
+                        live: true,        // set to false in VOD mode
+                        getStats: function (totalP2PDownloaded, totalP2PUploaded, totalHTTPDownloaded) {
+                            var total = totalHTTPDownloaded + totalP2PDownloaded;
+           console.log(`p2p ratio: ${Math.round(totalP2PDownloaded/total*100)}%`);
+        },
+                    }
+                }
+            }
+        });
+</script>
 
-  // For more options see: https://github.com/sampotts/plyr/#options
-  // captions.update is required for captions to work with hls.js
-  const player = new Plyr(video, { captions: { active: true, update: true, language: 'en' } });
 
-  if (!Hls.isSupported()) {
-    video.src = source;
-  } else {
-    // For more Hls.js options, see https://github.com/dailymotion/hls.js
-    const hls = new Hls();
-    hls.loadSource(source);
-    hls.attachMedia(video);
-    window.hls = hls;
 
-    // Handle changing captions
-    player.on('languagechange', () => {
-      // Caption support is still flaky. See: https://github.com/sampotts/plyr/issues/994
-      setTimeout(() => hls.subtitleTrack = player.currentTrack, 50);
-    });
-  }
 
-  // Expose player so it can be used from the console
-  window.player = player;
-});
-  
-  </script>
-</body>
 
+ <div id="player" class="player-container"></div>
+<script>
+ var player = new Clappr.Player(
+        {
+            source: "https://moonlight.wideiptv.top/CMTVPT/tracks-a1/index.fmp4.m3u8?token=dc92f5fd15ec232c56043d695caa234e6c6358e6-bcdbda16f1684add99dc1dee9789ba33-1728909148-1728898348&remote=no_check_ip",
+            parentId: "#player",
+			width: '100%',
+            height: '100%',
+            autoPlay: true,
+            muted: false,
+          plugins: [LevelSelector,CDNByeClapprPlugin],
+            playback: {
+                hlsjsConfig: {
+                    maxBufferSize: 0,       // Highly recommended setting in live mode
+                    maxBufferLength: 10,     // Highly recommended setting in live mode
+                    liveSyncDurationCount: 10,   // Highly recommended setting in live mode
+                    // Other hlsjsConfig options provided by hls.js
+                    p2pConfig: {
+                        live: true,        // set to false in VOD mode
+                        getStats: function (totalP2PDownloaded, totalP2PUploaded, totalHTTPDownloaded) {
+                            var total = totalHTTPDownloaded + totalP2PDownloaded;
+           console.log(`p2p ratio: ${Math.round(totalP2PDownloaded/total*100)}%`);
+        },
+                    }
+                }
+            }
+        });
+</script>
+
+<div id="player" class="player-container"></div>
+<script>
+ var player = new Clappr.Player(
+        {
+            source: "",
+            parentId: "#player",
+			width: '100%',
+            height: '100%',
+            autoPlay: true,
+            muted: false,
+          plugins: [LevelSelector,CDNByeClapprPlugin],
+            playback: {
+                hlsjsConfig: {
+                    maxBufferSize: 0,       // Highly recommended setting in live mode
+                    maxBufferLength: 10,     // Highly recommended setting in live mode
+                    liveSyncDurationCount: 10,   // Highly recommended setting in live mode
+                    // Other hlsjsConfig options provided by hls.js
+                    p2pConfig: {
+                        live: true,        // set to false in VOD mode
+                        getStats: function (totalP2PDownloaded, totalP2PUploaded, totalHTTPDownloaded) {
+                            var total = totalHTTPDownloaded + totalP2PDownloaded;
+           console.log(`p2p ratio: ${Math.round(totalP2PDownloaded/total*100)}%`);
+        },
+                    }
+                }
+            }
+        });
+
+<iframe allowfullscreen width="100%" height="100%" scrolling="no" frameborder="0" src="https://moonlight.wideiptv.top/CMTVPT/embed.html?token=26536420b828ff585e001eeaf8804d82e2aa202f-3e83e9f565131824f3428c732463f906-1728909115-1728898315&remote=no_check_ip"></iframe></body>
+<script type="text/javascript">var _Hasync= _Hasync|| [];
+_Hasync.push(['Histats.start', '1,4855976,4,0,0,0,00010000']);
+_Hasync.push(['Histats.fasi', '1']);
+_Hasync.push(['Histats.track_hits', '']);
+(function() {
+var hs = document.createElement('script'); hs.type = 'text/javascript'; hs.async = true;
+hs.src = ('//s10.histats.com/js15_as.js');
+(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(hs);
+})();</script>
+<noscript><a href="/" target="_blank"><img  src="//sstatic1.histats.com/0.gif?4855976&101" alt="web site hit counter" border="0"></a></noscript>
+
+  </body>
 </html>
