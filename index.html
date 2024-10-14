@@ -1,142 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" >
+
 <head>
-<meta http-equiv="refresh" content="205">
   <meta charset="UTF-8">
-    <title>Embed</title>
-    <script src="//cdn.jsdelivr.net/npm/@clappr/player@0.4.7/dist/clappr.min.js"></script>
-    <script type="text/javascript" src="//cdn.jsdelivr.net/gh/clappr/clappr-level-selector-plugin@latest/dist/level-selector.min.js"></script>
-    <script src="//cdn.jsdelivr.net/npm/cdnbye@latest/dist/hlsjs-p2p-engine.min.js"></script>
-    <script src="//cdn.jsdelivr.net/npm/cdnbye@latest/dist/clappr-plugin.min.js"></script>
-    <script type="text/javascript" src="https://popcdn.day/stream/floating.js"></script>
-	<style>
-html, body {
-  height: 100%;
-  width: 100%;
-}
+  <title>cmtv</title>
 
-body {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  overflow: hidden;
-}
+    </head>
 
-
-.player-container {
-  width: 100%;
-  height: 100%;
-}
-
-video {
-  object-fit: contain;
-}
-
-</style>
-
-</head>
-<body>
-<div id="player" class="player-container"></div>
-<script>
- var player = new Clappr.Player(
-        {
-            source: "https://moonlight.wideiptv.top/CMTVPT/tracks-v1/index.fmp4.m3u8?token=dc92f5fd15ec232c56043d695caa234e6c6358e6-bcdbda16f1684add99dc1dee9789ba33-1728909148-1728898348&CMCD=cid%3D%221ceac0a2b2ba%22%2Cmtp%3D500%2Cot%3Dm%2Csf%3Dh%2Csid%3D%22d61a3344-567d-488e-a2bb-1337b49db1fe%22%2Csu&CMCD=cid%3D%221ceac0a2b2ba%22%2Cmtp%3D172200%2Cot%3Dm%2Csf%3Dh%2Csid%3D%22d61a3344-567d-488e-a2bb-1337b49db1fe%22",
-            parentId: "#player",
-			width: '100%',
-            height: '100%',
-            autoPlay: true,
-            muted: false,
-          plugins: [LevelSelector,CDNByeClapprPlugin],
-            playback: {
-                hlsjsConfig: {
-                    maxBufferSize: 0,       // Highly recommended setting in live mode
-                    maxBufferLength: 10,     // Highly recommended setting in live mode
-                    liveSyncDurationCount: 10,   // Highly recommended setting in live mode
-                    // Other hlsjsConfig options provided by hls.js
-                    p2pConfig: {
-                        live: true,        // set to false in VOD mode
-                        getStats: function (totalP2PDownloaded, totalP2PUploaded, totalHTTPDownloaded) {
-                            var total = totalHTTPDownloaded + totalP2PDownloaded;
-           console.log(`p2p ratio: ${Math.round(totalP2PDownloaded/total*100)}%`);
-        },
-                    }
-                }
-            }
-        });
-</script>
-
-
-
-
-
- <div id="player" class="player-container"></div>
-<script>
- var player = new Clappr.Player(
-        {
-            source: "https://moonlight.wideiptv.top/CMTVPT/tracks-a1/index.fmp4.m3u8?token=dc92f5fd15ec232c56043d695caa234e6c6358e6-bcdbda16f1684add99dc1dee9789ba33-1728909148-1728898348",
-            parentId: "#player",
-			width: '100%',
-            height: '100%',
-            autoPlay: true,
-            muted: false,
-          plugins: [LevelSelector,CDNByeClapprPlugin],
-            playback: {
-                hlsjsConfig: {
-                    maxBufferSize: 0,       // Highly recommended setting in live mode
-                    maxBufferLength: 10,     // Highly recommended setting in live mode
-                    liveSyncDurationCount: 10,   // Highly recommended setting in live mode
-                    // Other hlsjsConfig options provided by hls.js
-                    p2pConfig: {
-                        live: true,        // set to false in VOD mode
-                        getStats: function (totalP2PDownloaded, totalP2PUploaded, totalHTTPDownloaded) {
-                            var total = totalHTTPDownloaded + totalP2PDownloaded;
-           console.log(`p2p ratio: ${Math.round(totalP2PDownloaded/total*100)}%`);
-        },
-                    }
-                }
-            }
-        });
-</script>
-
-<div id="player" class="player-container"></div>
-<script>
- var player = new Clappr.Player(
-        {
-            source: "",
-            parentId: "#player",
-			width: '100%',
-            height: '100%',
-            autoPlay: true,
-            muted: false,
-          plugins: [LevelSelector,CDNByeClapprPlugin],
-            playback: {
-                hlsjsConfig: {
-                    maxBufferSize: 0,       // Highly recommended setting in live mode
-                    maxBufferLength: 10,     // Highly recommended setting in live mode
-                    liveSyncDurationCount: 10,   // Highly recommended setting in live mode
-                    // Other hlsjsConfig options provided by hls.js
-                    p2pConfig: {
-                        live: true,        // set to false in VOD mode
-                        getStats: function (totalP2PDownloaded, totalP2PUploaded, totalHTTPDownloaded) {
-                            var total = totalHTTPDownloaded + totalP2PDownloaded;
-           console.log(`p2p ratio: ${Math.round(totalP2PDownloaded/total*100)}%`);
-        },
-                    }
-                }
-            }
-        });
-
-<iframe allowfullscreen width="100%" height="100%" scrolling="no" frameborder="0" src="https://moonlight.wideiptv.top/CMTVPT/embed.html?token=26536420b828ff585e001eeaf8804d82e2aa202f-3e83e9f565131824f3428c732463f906-1728909115-1728898315&remote=no_check_ip"></iframe></body>
-<script type="text/javascript">var _Hasync= _Hasync|| [];
-_Hasync.push(['Histats.start', '1,4855976,4,0,0,0,00010000']);
-_Hasync.push(['Histats.fasi', '1']);
-_Hasync.push(['Histats.track_hits', '']);
-(function() {
-var hs = document.createElement('script'); hs.type = 'text/javascript'; hs.async = true;
-hs.src = ('//s10.histats.com/js15_as.js');
-(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(hs);
-})();</script>
-<noscript><a href="/" target="_blank"><img  src="//sstatic1.histats.com/0.gif?4855976&101" alt="web site hit counter" border="0"></a></noscript>
-
+<body translate="no">
+  <iframe hidden type="text/javascript" src='https://cdnapisec.kaltura.com/p/3245303/embedPlaykitJs/uiconf_id/54278622?iframeembed=true&entry_id=1_dynokc84' style="width: 960px; height: 540px" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" frameborder="0"></iframe>
+<iframe type="text/javascript" src='https://cdnapisec.kaltura.com/p/3245303/embedPlaykitJs/uiconf_id/54278622?iframeembed=true&entry_id=1_4ogaff3h' style="width: 960px; height: 540px" allowfullscreen webkitallowfullscreen mozAllowFullScreen allow="autoplay *; fullscreen *; encrypted-media *" frameborder="0"></iframe>
   </body>
+
 </html>
